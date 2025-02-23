@@ -1,5 +1,5 @@
 # AI Handwriting detection of digit 2 with one input image
-The idea is to use one image as input and train a model on a large dataset generated from that single image. This approach allows the model to learn effectively even when starting with only one image.
+The idea is to use only 1 image as input and train a model on a large dataset generated from that single image. This approach allows the model to learn effectively even when starting with only one image.
 
 I train CNN with VAE generated images instead of augmented images because,
 1.	Captures the underlying data distribution, generating images consistent with the training data.
@@ -36,6 +36,8 @@ The goal of this section is to create variations of an input image (e.g., a hand
 4.	Brightness/Contrast Adjustments: These changes simulate different lighting conditions.
 5.	Blurring: Adds noise and smoothness to the images.
 6.	Generate 100 Variations: Finally applying these variations create new 100 images
+
+![Image Augmentation 100 variations](https://github.com/KowshikB03/AI-Handwriting-Detection/blob/0dbb2398cb751efdffbe2419ec88214c54597804/Augmentation.png)
 ## Variational Autoencoder (VAE)
 ### Goal
 The VAE is used to generate new images by sampling from the latent space. It learns a lower-dimensional representation of the input data (latent space) of the 100 input images from augmentation step  and generates new samples by decoding random points in this latent space.
@@ -53,6 +55,9 @@ The VAE is used to generate new images by sampling from the latent space. It lea
 5.	Generate New Images:
 -	Sample random points from the latent space (prior distribution, usually a standard Gaussian).
 -	Decode these points to generate new images.
+
+![VAE Generated 100 images](https://github.com/KowshikB03/AI-Handwriting-Detection/blob/0dbb2398cb751efdffbe2419ec88214c54597804/VAE_Generation.png)
+
 ## Latent Space Analysis
 This latent space visualization uses t-SNE to reduce high-dimensional data to a 2D representation while maintaining its structure. Here are some key advantages of this latent space:
 1.	Clear Cluster Separation:
@@ -61,6 +66,8 @@ This latent space visualization uses t-SNE to reduce high-dimensional data to a 
 2.	Balanced Distribution:
 -	The points are not overly concentrated in a single region, preventing issues like overfitting or mode collapse.
 -	Well-distributed clusters suggest the latent space captures diverse data patterns effectively.
+
+  ![Latent space analysis](https://github.com/KowshikB03/AI-Handwriting-Detection/blob/0dbb2398cb751efdffbe2419ec88214c54597804/VAE_Latent%20Space%20Visualization.png)
 
 ## Convolutional Neural Network (CNN)
 ### Goal
@@ -77,12 +84,18 @@ The CNN is trained to classify images into three categories:
 -	Use max-pooling layers to reduce spatial dimensions.
 -	Use fully connected layers for classification.
 3.	Convolutional Layers: Extract spatial features from the images.
+![CNN Layer 1](https://github.com/KowshikB03/AI-Handwriting-Detection/blob/0dbb2398cb751efdffbe2419ec88214c54597804/CNN_layer1%20.png)
+![CNN Layer 2](https://github.com/KowshikB03/AI-Handwriting-Detection/blob/0dbb2398cb751efdffbe2419ec88214c54597804/CNN_layer2.png)
+![CNN Layer 3](https://github.com/KowshikB03/AI-Handwriting-Detection/blob/0dbb2398cb751efdffbe2419ec88214c54597804/CNN_layer3.png)
 4.	Max-Pooling Layers: Reduce the spatial dimensions while retaining important features.
 5.	Fully Connected Layers: Combine features for classification.
 6.	Softmax Activation: Outputs probabilities for the three classes.
 7.	Train the CNN:
 -	Use categorical cross-entropy as loss function and the Adam optimizer.
 -	Train for 5 epochs.
+
+![CNN Architecture](https://github.com/KowshikB03/AI-Handwriting-Detection/blob/0dbb2398cb751efdffbe2419ec88214c54597804/CNN_architecture.png)
+![CNN Prediction](https://github.com/KowshikB03/AI-Handwriting-Detection/blob/0dbb2398cb751efdffbe2419ec88214c54597804/CNN%20predictions.png)
 
 
 
